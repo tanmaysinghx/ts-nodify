@@ -1,0 +1,48 @@
+name: Publish to npm
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org/
+
+      - name: Authenticate to npm
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build if TS
+        run: |
+          if [ -f tsconfig.json ]; then npm run build; fi
+
+      - name: Check version change
+        id: version_check
+        run: |
+          git fetch origin main
+          CHANGED=$(git diff origin/main -- package.json || true)
+          echo "changes=$CHANGED" >> $GITHUB_OUTPUT
+
+      - name: Publish to npm
+        if: steps.version_check.outputs.changes != ''
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Tag release
+        if: steps.version_check.outputs.changes != ''
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a "v$VERSION" -m "Release v$VERSION"
+          git push origin "v$VERSION"
