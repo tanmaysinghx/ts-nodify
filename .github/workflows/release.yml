@@ -48,6 +48,7 @@ jobs:
             echo "publish=true" >> $GITHUB_OUTPUT
           else
             echo "publish=false" >> $GITHUB_OUTPUT
+          fi
 
       - name: Publish to npm
         if: steps.should_publish.outputs.publish == 'true'
