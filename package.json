@@ -1,6 +1,6 @@
 {
   "name": "ts-nodify",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "CLI tool to quickly scaffold a Node.js Express backend project with TypeScript, JavaScript, logger, and modular folder structure",
   "bin": {
     "ts-nodify": "./cli.js"

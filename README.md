@@ -22,11 +22,11 @@
 Globally (recommended):
 
 ```bash
-npm install -g kickoff
+npm install -g ts-nodify
 ```
 
 ```bash
-npx kickoff
+npx ts-nodify
 ```
 
 ---
