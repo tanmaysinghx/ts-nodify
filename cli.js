@@ -531,6 +531,15 @@ jobs:
     console.log("✅ GitHub Actions CI workflow generated");
   }
 
+  /* ---------- Check for updates ---------- */
+  try {
+    const latest = execSync('npm view ts-nodify version').toString().trim();
+    if (latest !== pkg.version) {
+      console.log(`⚡ A new version (${latest}) is available! Run 'npm install -g ts-nodify@latest' to update.`);
+    }
+  } catch (err) {
+    console.error('Failed to check for updates:', err.message);
+  }
 
   /* ---------- Final messages ---------- */
   console.log(
