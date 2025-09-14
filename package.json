@@ -1,0 +1,40 @@
+{
+  "name": "ts-nodify",
+  "version": "1.0.1",
+  "description": "CLI tool to quickly scaffold a Node.js Express backend project with TypeScript, JavaScript, logger, and modular folder structure",
+  "bin": {
+    "ts-nodify": "./cli.js"
+  },
+  "preferGlobal": true,
+  "scripts": {
+    "start": "node cli.js",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "cli",
+    "scaffold",
+    "typescript",
+    "javascript",
+    "winston",
+    "logger",
+    "project-template"
+  ],
+  "author": "Tanmay Singh <tanmaysinghx@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "figlet": "^1.9.1",
+    "inquirer": "^9.2.7"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "type": "module",
+  "files": [
+    "cli.js",
+    "src/",
+    "README.md"
+  ]
+}
